@@ -1,5 +1,4 @@
-create or replace view vueBdEd10
-as
+create or replace view vueBdEd10 as
 select nomEditeur, mailEditeur, COUNT(isbn) as "nombre BD"
 from Editeur e join Serie s on e.numEditeur = s.numEditeur
                join bd    b on s.numSerie   = b.numSerie
