@@ -18,7 +18,7 @@ procédure devra retourner des éléments de ce type de données.
 On rajoutera le comportement suivant : si le minimum est égal au maximum pour
 un client, on affichera le message 'Egalité du minimum et maximum pour le
 client %' en précisant le nom du client.
-NB : utiliser une boucle FOR ou un curseur... */
+NB : utiliser une boucle FOR ou un curseur...*/
 
 Drop type if exists clientBD cascade;
 Create type clientBD as (num int,nom varchar(11),mini int, maxi int, somme int);
