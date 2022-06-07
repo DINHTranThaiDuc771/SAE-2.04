@@ -12,25 +12,26 @@ As $$
     clientRet Client%ROWTYPE;
     compareTable int;
   Begin
-    Drop view if exists vue_proc_d cascade;    
-    Create view vue_proc_d as
-    Select isbn
-    From  BD b join Serie s on s.numSerie = b.numSerie
-    Where nomSerie = nom_serie_param;
-
     for ncli in Select * from Client
     loop
+      Drop view if exists vue_proc_d cascade;    
+      
+      Create view vue_proc_d as
+      Select isbn
+      From Vente v join Concerner c1 on c1.numVente = v.numVente
+      Where numClient=ncli
+      Except
+      Select isbn
+      From  BD b join Serie s on s.numSerie = b.numSerie
+      Where nomSerie = nom_serie_param;
+ 
+      
       Select count(*) into compareTable
-      From (Select isbn
-            From Vente join Concerner c1 on c1.numVente = v.numVente
-            Where numClient=ncli
-            Order by isbn
-            Minus
-            Select * from vue_proc_d Order by isbn;
-            )
+      From vue_proc_d;
+      
       if compareTable = 0 then
         Select * into clientRet from Client Where numClient = ncli;
-      enf if;
+      end if;
       return next clientRet;
     end loop;
     return;
