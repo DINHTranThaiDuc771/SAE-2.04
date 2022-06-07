@@ -7,7 +7,7 @@ Cette suppression va générer une violation de clé étrangère dans la table
 Pour gérer cela, on utilisera le code d'erreur FOREIGN_KEY_VIOLATION
 dans un bloc EXCEPTION dans lequel on supprimera tous les tuples de la table
 ‘Concerner’ qui possèdent ce numéro de vente, avant de supprimer la venet ellemême. On pourra au passage afficher aussi un message d'avertissement sur cette
-exception.*/
+exception*/
 Create or replace function proc_i (num_vente_param Vente.numVente%TYPE)
 returns void
 As $$
