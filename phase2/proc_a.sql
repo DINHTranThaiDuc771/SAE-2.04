@@ -1,4 +1,4 @@
-/* a Ecrire une procédure qui prend en paramètre un numéro d’auteur dessinateur et
+/*Ecrire une procédure qui prend en paramètre un numéro d’auteur dessinateur et
 qui renvoie pour chaque titre de BD de l’auteur, le nombre d’exemplaires vendus
 de cette BD.*/
 
