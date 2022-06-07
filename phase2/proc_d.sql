@@ -12,7 +12,7 @@ As $$
     clientRet Client%ROWTYPE;
     compareTable int;
   Begin
-    for ncli in Select * from Client
+    for ncli in Select numClient from Client
     loop
       Drop view if exists vue_proc_d cascade;    
       
