@@ -7,7 +7,7 @@ l'identifiant du client, son nom et son classement dans les acheteurs (attribut
 nommé ‘rang’).
 Ecrire une fonction qui renvoie pour tous les clients, son identifiant, son nom et
 son classement d'acheteur décrit ci-dessus.
-NB : on pourra avantageusement utiliser une boucle FOR ou un curseur... */
+NB : on pourra avantageusement utiliser une boucle FOR ou un curseur...*/
 
 Drop type if exists rangClient cascade;
 Create type rangClient as (numClient int, nomClient varchar(11), rang int);
