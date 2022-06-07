@@ -19,5 +19,3 @@ AS $$
         GROUP BY prixActuel;
     END
 $$LANGUAGE PLPGSQL;
-
-SELECT * from proc_b('L Adoption');
