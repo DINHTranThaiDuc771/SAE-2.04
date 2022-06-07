@@ -1,7 +1,7 @@
 /*Écrire une procédure qui prend en paramètre une année donnée, et un nom
 d’éditeur et qui renvoie le(s) tuple(s) comportant l’année et le nom de l’éditeur
 d’une part, associé au nom et email du(des) client(s) d’autre part ayant acheté le
-plus de BD cette année-là chez cet éditeur.*/
+plus de BD cette année-là chez cet éditeur*/
 Drop type if exists type_proc_f cascade;
 Create type type_proc_f as (annee float, nom_editeur varChar(23), nom_client varchar(11),mail_client text);
                            
