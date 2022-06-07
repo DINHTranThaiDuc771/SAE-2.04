@@ -11,8 +11,10 @@ As $$
     ncli Client.numClient%TYPE;
     clientRet Client%ROWTYPE;
     compareTable int;
+    nbClient int;
     num_isbn BD.isbn%TYPE;
   Begin
+    nbClient :=0;
     for ncli in Select numClient from Client
     loop
       compareTable := 0 ;
@@ -28,6 +30,7 @@ As $$
       end loop;
       if compareTable = 0 then
         Select * into clientRet from Client Where numClient = ncli;
+        nbClient := nbClient +1;
       else
         clientRet := null;
       end if;
@@ -36,6 +39,9 @@ As $$
         return next clientRet;
       end if;
     end loop;
+    if nbClient = 0 then
+      raise notice 'Aucun client n’a acheté tous les exemplaires de la série %',nom_serie_param;
+    end if;
     return;
   End
 $$ Language PLpgSQL;  
