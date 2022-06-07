@@ -7,27 +7,35 @@ remplacera les « % » par les noms correspondants.*/
 
 DROP FUNCTION if exists prod_c CASCADE;
 
-CREATE or REPLACE FUNCTION prod_c(un_numEditeur Editeur.numEditeur%TYPE, un_numDessinateur Auteur.numAuteur%TYPE, un_numScenariste Auteur.numAuteur%TYPE)
+CREATE or REPLACE FUNCTION prod_c(un_nomEditeur Editeur.nomEditeur%TYPE, un_nomDessinateur Auteur.nomAuteur%TYPE, un_nomScenariste Auteur.nomAuteur%TYPE)
 RETURNS SETOF BD
 AS $$
-    DECLARE 
-        une_bd BD%ROWTYPE;
     BEGIN 
-        SELECT * INTO une_bd
+        PERFORM *
         FROM BD 
         WHERE isbn IN (Select isbn FROM BD b JOIN Auteur a1
-                                        ON b.numAuteurDessinateur = un_numDessinateur
+                                        ON a1.numAuteur = b.numAuteurScenariste
                                         JOIN Auteur a2
-                                        ON b.numAuteurScenariste = un_numScenariste
+                                        ON b.numAuteurDessinateur = a2.numAuteur
                                         JOIN Serie s 
                                         ON b.numSerie = s.numSerie
                                         JOIN Editeur e 
-                                        ON e.numEditeur = un_numEditeur);
-        if(une_bd IS NULL) then 
+                                        ON e.numEditeur = s.numEditeur
+                         WHERE a1.nomAuteur = un_nomScenariste AND a2.nomAuteur = un_nomDessinateur AND e.nomEditeur = un_nomEditeur);
+        if(NOT FOUND) then 
           RAISE EXCEPTION 'L editeur % n a pas édité de BD de ces deux auteurs % et %', numEditeur, numDessinateur, numScenariste;
         else
-          return query une_bd;            
+          return query Select *
+                       FROM BD 
+                       WHERE isbn IN (Select isbn FROM BD b JOIN Auteur a1
+                                                       ON a1.numAuteur = b.numAuteurScenariste
+                                                       JOIN Auteur a2
+                                                       ON b.numAuteurDessinateur = a2.numAuteur
+                                                       JOIN Serie s 
+                                                       ON b.numSerie = s.numSerie
+                                                       JOIN Editeur e 
+                                                       ON e.numEditeur = s.numEditeur
+                                       WHERE a1.nomAuteur = un_nomScenariste AND a2.nomAuteur = un_nomDessinateur AND e.nomEditeur = un_nomEditeur);
+        end if;           
     END
-$$LANGUAGE PLPGSQL;    
-
-SELECT * FROM prod_c(1,23,23);
+$$LANGUAGE PLPGSQL; 
