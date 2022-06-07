@@ -3,7 +3,7 @@ qui renvoie les clients ayants acheté tous les albums de la série (utiliser de
 boucles FOR et/ou des curseurs).
 Si aucun client ne répond à la requête alors on affichera un message
 d’avertissement ‘Aucun client n’a acheté tous les exemplaires de la série %’, en
-complétant le ‘ %’ par le nom de la série.*/
+complétant le ‘ %’ par le nom de la série*/
 Create or replace function proc_d (nom_serie_param Serie.nomSerie%TYPE)
 returns setOf Client
 As $$
