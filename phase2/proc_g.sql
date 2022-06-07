@@ -19,7 +19,7 @@ Declare
 Begin
 	Drop view if exists vue_proc_g cascade;
 	Create view vue_proc_g as
-	Select nomEditeur, c.numClient, nomClient,Sum (c1.quantite) as "quantite_achat"
+	Select nomEditeur, c.numClient, nomClient,Count (c1.isbn) as "quantite_de_isbn_achat"
 	From   Editeur e join Serie s on s.numEditeur = e.numEditeur
                      join BD    b on b.numSerie   = s.numSerie
                      join Concerner c1 on c1.isbn = b.isbn
@@ -33,7 +33,7 @@ Begin
 	      Fetch curseur into cli;
 	      Exit when not found;
 	      tuple.nom_client := cli.nomClient;
-	      Select quantite_achat into achat 
+	      Select quantite_de_isbn_achat into achat 
 	      from vue_proc_g 
 	      where nomEditeur = nom_editeur_param and numClient = cli.numClient;
 	      if achat >10 then 
