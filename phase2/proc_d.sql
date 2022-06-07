@@ -14,11 +14,10 @@ As $$
   Begin
     for ncli in Select numClient from Client
     loop
-      Drop view if exists vue_proc_d cascade;    
-      Create view vue_proc_d as
+  
       Select isbn
       From Vente v join Concerner c1 on c1.numVente = v.numVente
-      Where numClient=ncli
+      Where numClient=ncli;
       Except
       Select isbn
       From  BD b join Serie s on s.numSerie = b.numSerie
