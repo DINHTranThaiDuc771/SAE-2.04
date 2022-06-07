@@ -18,7 +18,7 @@ Declare
 Begin
 	Drop view if exists vue_proc_g cascade;
 	Create view vue_proc_g as
-	Select nomEditeur, c.numClient, nomClient,Sum (quantite) as "quantite_achat"
+	Select nomEditeur, c.numClient, nomClient,Sum (c1.quantite) as "quantite_achat"
 	From   Editeur e join Serie s on s.numEditeur = e.numEditeur
                      join BD    b on b.numSerie   = s.numSerie
                      join Concerner c1 on c1.isbn = b.isbn
