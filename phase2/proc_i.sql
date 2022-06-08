@@ -15,6 +15,8 @@ As $$
     Perform * from Vente Where numVente = num_vente_param;
     if not found then
       raise exception 'Ce numero de vente n''existe pas';
+    else
+      raise notice 'Vente supprimée !';
     end if;
     Delete from Vente
     Where numVente = num_vente_param;
@@ -22,7 +24,6 @@ As $$
     When FOREIGN_KEY_VIOLATION then
       Delete from Concerner
       Where numVente = num_vente_param;
-    RAISE NOTICE 'Vente supprimée !';
   End
 $$Language PLpgSQL;
 --Test 
