@@ -55,3 +55,5 @@ Begin
    close curseur;
 End
 $$Language PLpgSQL;
+
+Select * from proc_g('Lombard');
