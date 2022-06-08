@@ -5,9 +5,9 @@ auteurs, ou qu’il n’existe pas de BD de ces deux auteurs, on devra générer
 message suivant « l’éditeur % n’a pas édité de BD des auteurs % et %» où on
 remplacera les « % » par les noms correspondants.*/
 
-DROP FUNCTION if exists prod_c CASCADE;
+DROP FUNCTION if exists proc_c CASCADE;
 
-CREATE or REPLACE FUNCTION prod_c(un_nomEditeur Editeur.nomEditeur%TYPE, un_nomDessinateur Auteur.nomAuteur%TYPE, un_nomScenariste Auteur.nomAuteur%TYPE)
+CREATE or REPLACE FUNCTION proc_c(un_nomEditeur Editeur.nomEditeur%TYPE, un_nomDessinateur Auteur.nomAuteur%TYPE, un_nomScenariste Auteur.nomAuteur%TYPE)
 RETURNS SETOF BD
 AS $$
     BEGIN 
