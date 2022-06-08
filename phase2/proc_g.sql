@@ -17,6 +17,7 @@ Declare
 	achat bigint;
 	tuple type_proc_g;
 Begin
+	/*Creer une vue qui contient groupé par les editeurs et ses clients*/
 	Drop view if exists vue_proc_g cascade;
 	Create view vue_proc_g as
 	Select nomEditeur, c.numClient, nomClient,Count (DISTINCT c1.isbn) as "quantite_de_isbn_achat"
@@ -36,6 +37,9 @@ Begin
 	      Select quantite_de_isbn_achat into achat 
 	      from vue_proc_g 
 	      where nomEditeur = nom_editeur_param and numClient = cli.numClient;
+	      if not found then
+	      	tuple.type := 'Aucun achat de ce client';
+	      end if;
 	      if achat >10 then 
 		tuple.type := 'très bons clients';
 	      end if;
