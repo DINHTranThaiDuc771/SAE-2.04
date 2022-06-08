@@ -22,6 +22,7 @@ As $$
     When FOREIGN_KEY_VIOLATION then
       Delete from Concerner
       Where numVente = num_vente_param;
+    RAISE NOTICE 'Vente supprimée !';
   End
 $$Language PLpgSQL;
 --Test 
