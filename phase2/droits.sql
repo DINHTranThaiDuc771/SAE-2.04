@@ -1,4 +1,8 @@
 /* ADMINISTRATEUR */
+GRANT   *
+ON      DATABASE
+TO      administrateur;
+
 GRANT   * 
 ON      Serie, BD, Editeur, Auteur, Vente, Client, Concerner 
 TO      administrateur 
